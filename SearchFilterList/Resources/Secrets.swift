@@ -11,6 +11,6 @@ import Foundation
 struct Secrets {
     
     //MARK: The API_KEY you can get from this readme project repository
-    static let API_KEY = "API KEY HERE"
+    static let API_KEY = "c9a2b598-9c93-4999-bd04-0194839ef2dc"
     
 }
