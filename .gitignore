@@ -27,7 +27,7 @@ xcuserdata/
 *.xcscmblueprint
 
 ## Files in Project 
-/secrets.swift
+/Secrets.swift
 
 ## Obj-C/Swift specific
 *.hmap
