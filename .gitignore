@@ -26,6 +26,9 @@ xcuserdata/
 *.xccheckout
 *.xcscmblueprint
 
+## Files in Project 
+/secrets.swift
+
 ## Obj-C/Swift specific
 *.hmap
 *.ipa
