@@ -181,11 +181,16 @@ extension DoctorListVC : UISearchBarDelegate {
         updateDoctorList(searchText: searchText)
     }
     
+    
+    //MARK: - Upadte Doctor list based on search keyword, hospital, and specialization
     func updateDoctorList(searchText: String){
+        
+        //Filter for search keyword
         doctorListShown = searchText.isEmpty ? doctorList : doctorList.filter({(dataString: Doctor) -> Bool in
             return dataString.name.range(of: searchText, options: .caseInsensitive) != nil
         })
     
+        //Filter for Hospital
         var tempDoctor: [Doctor] = []
         if !hospital.isEmpty {
             hospital.forEach { selectedHospital in
@@ -195,6 +200,7 @@ extension DoctorListVC : UISearchBarDelegate {
             doctorListShown = tempDoctor
         }
         
+        //Filter for Specialization
         if !specialization.isEmpty {
             tempDoctor.removeAll()
             specialization.forEach { seletedSpecialization in
