@@ -28,18 +28,18 @@ class ListPickerVC: UIViewController {
     var hospitalList: [Hospital] = []
     var specializationList: [Specialization] = []
     
-    var SelectedItem: Any?
-
+    var SelectedItem: [Any] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
         setupGesture()
     }
-
+    
     //MARK: Setup and register view
     func setupView(){
         tableView.register(UINib.init(nibName: "ListPickerCell", bundle: Bundle(for: ListPickerCell.self)), forCellReuseIdentifier: "ListPickerCell")
-
+        
         pickerView.setDefaultCornerRadius()
         selectButton.setDefaultBorderButton()
         titleLabel.text = titlePicker
@@ -55,9 +55,33 @@ class ListPickerVC: UIViewController {
     @objc func bgTappad(){
         dismiss(animated: true, completion: nil)
     }
-
+    
     @IBAction func selectButtonTapped(_ sender: Any) {
+        getAllTextFromTableView()
+    }
+    
+    func getAllTextFromTableView() {
+        guard let indexPaths = self.tableView.indexPathsForSelectedRows else {
+            return
+        }
         
+        for indexPath in indexPaths {
+            switch pickerType {
+            case .hospital:
+                let item = hospitalList[indexPath.row]
+                SelectedItem.append(item)
+                break
+            case .specialization:
+                let item = specializationList[indexPath.row]
+                SelectedItem.append(item)
+                break
+            default:
+                break
+            }
+        }
+        dump(SelectedItem)
+        dismiss(animated: true, completion: nil)
+        callbackButton?(SelectedItem)
     }
 }
 
@@ -94,19 +118,20 @@ extension ListPickerVC: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch pickerType {
-        case .hospital:
-            let item = hospitalList[indexPath.row]
-            SelectedItem = item
-        case .specialization:
-            let item = specializationList[indexPath.row]
-            SelectedItem = item
-        default:
-            break
-        }
+//        switch pickerType {
+//        case .hospital:
+//            let item = hospitalList[indexPath.row]
+//            SelectedItem = item
+//        case .specialization:
+//            let item = specializationList[indexPath.row]
+//            SelectedItem = item
+//        default:
+//            break
+//        }
         
-        dismiss(animated: true, completion: nil)
-        callbackButton?(SelectedItem)
+        //        dismiss(animated: true, completion: nil)
+        //        callbackButton?(SelectedItem)
     }
+    
 }
 

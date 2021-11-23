@@ -30,8 +30,8 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZMO-my-RZt">
                     <rect key="frame" x="41.5" y="271.5" width="331" height="353"/>
                     <subviews>
-                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tza-md-WEQ">
-                            <rect key="frame" x="16" y="343" width="299" height="42"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tza-md-WEQ">
+                            <rect key="frame" x="16" y="303" width="299" height="42"/>
                             <color key="backgroundColor" name="PrimaryRed"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="42" id="ptF-UT-Lh9"/>
@@ -50,8 +50,8 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="DjW-m6-xzu">
-                            <rect key="frame" x="16" y="46" width="299" height="285"/>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="DjW-m6-xzu">
+                            <rect key="frame" x="16" y="46" width="299" height="245"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <outlet property="dataSource" destination="-1" id="jFW-T3-gyU"/>
@@ -70,7 +70,7 @@
                         <constraint firstItem="DjW-m6-xzu" firstAttribute="leading" secondItem="ZMO-my-RZt" secondAttribute="leading" constant="16" id="dI8-wA-YfR"/>
                         <constraint firstAttribute="width" secondItem="ZMO-my-RZt" secondAttribute="height" multiplier="15:16" id="qfS-8t-sab"/>
                         <constraint firstItem="DjW-m6-xzu" firstAttribute="top" secondItem="wnw-J7-ZpC" secondAttribute="bottom" constant="12" id="sVd-OR-dJP"/>
-                        <constraint firstAttribute="bottom" secondItem="tza-md-WEQ" secondAttribute="bottom" constant="-32" id="x9i-Pu-FC6"/>
+                        <constraint firstAttribute="bottom" secondItem="tza-md-WEQ" secondAttribute="bottom" constant="8" id="x9i-Pu-FC6"/>
                         <constraint firstItem="tza-md-WEQ" firstAttribute="top" secondItem="DjW-m6-xzu" secondAttribute="bottom" constant="12" id="zOS-so-A78"/>
                     </constraints>
                 </view>

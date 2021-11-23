@@ -24,8 +24,8 @@ class DoctorListVC: UIViewController {
     var doctorListShown: [Doctor] = []
     
     //Selected Filter
-    var hospital: Hospital?
-    var specialization: Specialization?
+    var hospital: [Hospital] = []
+    var specialization: [Specialization] = []
     
     private var isLoading = false
     
@@ -73,12 +73,12 @@ class DoctorListVC: UIViewController {
     
     //MARK: Update Filter View and Doctor List
     func updateData(){
-        if let hospital = hospital {
-            hospitalLabel.text = hospital.name
+        if hospital.count > 0 {
+        hospitalLabel.text = "\(hospital.count) Selected"
             hospitalLabel.textColor = UIColor(named: "Accent")
         }
-        if let specialization = specialization {
-            SpecializationLabel.text = specialization.name
+        if specialization.count > 0 {
+            SpecializationLabel.text = "\(specialization.count) Selected"
             SpecializationLabel.textColor = UIColor(named: "Accent")
         }
         
@@ -119,7 +119,7 @@ class DoctorListVC: UIViewController {
         vc.hospitalList = hospitalList
         vc.callbackButton = { [weak self] item in
             
-            self?.hospital = item as? Hospital
+            self?.hospital = (item as? [Hospital])!
             self?.updateData()
 
         }
@@ -139,7 +139,7 @@ class DoctorListVC: UIViewController {
         vc.specializationList = specializationList
         vc.callbackButton = { [weak self] item in
             
-            self?.specialization = item as? Specialization
+            self?.specialization = (item as? [Specialization])!
             self?.updateData()
 
         }
@@ -185,9 +185,24 @@ extension DoctorListVC : UISearchBarDelegate {
         doctorListShown = searchText.isEmpty ? doctorList : doctorList.filter({(dataString: Doctor) -> Bool in
             return dataString.name.range(of: searchText, options: .caseInsensitive) != nil
         })
+    
+        var tempDoctor: [Doctor] = []
+        if !hospital.isEmpty {
+            hospital.forEach { selectedHospital in
+                let matchedDoctor = hospital.isEmpty ? doctorListShown : doctorListShown.filter{$0.hospital.contains(where: { element in element.id == selectedHospital.id})}
+                tempDoctor.append(contentsOf: matchedDoctor)
+            }
+            doctorListShown = tempDoctor
+        }
         
-        doctorListShown = hospital != nil ? doctorListShown.filter{$0.hospital.contains(where: { element in element.id == hospital!.id})} : doctorListShown
-        doctorListShown = specialization != nil ? doctorListShown.filter{$0.specialization.id == specialization!.id} : doctorListShown
+        if !specialization.isEmpty {
+            tempDoctor.removeAll()
+            specialization.forEach { seletedSpecialization in
+                let matchedDoctor = specialization.isEmpty ? doctorListShown : doctorListShown.filter{$0.specialization.id == seletedSpecialization.id}
+                tempDoctor.append(contentsOf: matchedDoctor)
+            }
+            doctorListShown = tempDoctor
+        }
         tableView.reloadData()
     }
 }
